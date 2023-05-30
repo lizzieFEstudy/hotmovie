@@ -4,21 +4,65 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>영화 기능테스트</title>
+        <title>최고 평점 영화 콜렉션</title>
+        <link rel="stylesheet" href="css/common.css" />
+        <link rel="stylesheet" href="css/main.css" />
     </head>
-    <body>
-        <div>
-            <input id="searchInput" type="text" value="Schindler's List" />
-            <button type="button" onclick="searchData()">검색</button>
-        </div>
+    <body id="wrap">
+        <div id="container">
+            <header id="header">
+                <h1>🌟최고 평점 영화 콜렉션</h1>
+            </header>
 
-        <ul id="movieList">
-            <!-- <li>
-                <strong>제목</strong>
-                <span>dsf</span>
-                <span>dsaf</span>
-            </li> -->
-        </ul>
+            <!-- 검색 영역 -->
+            <section class="search_section">
+                <div class="inner flex-center fd-col">
+                    <div class="search_form">
+                        <h2 class="sr_only">영화 검색</h2>
+                        <input id="searchInput" class="form" type="text" value="Schindler's List" placeholder="영화 제목을 검색해보세요" />
+                        <button type="button" class="btn btn_primary" onclick="searchData()">검색</button>
+                        <button type="button" class="btn btn_gray" onclick="allData()">초기화</button>
+                    </div>
+                    <!-- <div class="recent_data">
+                        <strong>최근 검색어</strong>
+                        <ul id="recentList" class="recent_list">
+                            <li><span>기생충</span><button type="button" class="del_btn" onclick="delRecentData()">삭제</button></li>
+                            <li><span>대부</span><button type="button" class="del_btn" onclick="delRecentData()">삭제</button></li>
+                        </ul>
+                    </div> -->
+                </div>
+            </section>
+
+            <!-- 영화리스트 영역 -->
+            <section class="movie_section">
+                <h2 class="sr_only">영화 리스트</h2>
+                <div class="inner">
+                    <ol id="movieList" class="movie_list">
+                        <!-- <li>
+                            <a href="#" class="figure">
+                                <div class="thumb">
+                                    <img src="https://image.tmdb.org/t/p/w500//cOwVs8eYA4G9ZQs7hIRSoiZr46Q.jpg" alt="영화 포스터" />
+                                    <div class="cover">
+                                        <span
+                                            >시실리에서 이민온 뒤, 정치권까지 영향력을 미치는 거물로 자리잡은 돈 꼴레오네는 갖가지 고민을 호소하는 사람들의
+                                            문제를 해결해주며 대부라 불리운다. 한편 솔로소라는 인물은 꼴레오네가와 라이벌인 탓타리아 패밀리와 손잡고 새로운 마약
+                                            사업을 제안한다. 돈 꼴레오네가 마약 사업에 참여하지 않기로 하자, 돈 꼴레오네를 저격해 그는 중상을 입고 사경을 헤매게
+                                            된다. 그 뒤, 돈 꼴레오네의 아들 소니는 조직력을 총 동원해 다른 패밀리들과 피를 부르는 전쟁을 시작하는데... 가족의
+                                            사업과 상관없이 대학에 진학한 뒤 인텔리로 지내왔던 막내 아들 마이클은 아버지가 총격을 당한 뒤, 아버지를 구하기 위해
+                                            위험천만한 협상 자리에 나선다.</span
+                                        >
+                                    </div>
+                                </div>
+                                <div class="figcaption">
+                                    <strong>대부</strong>
+                                    <span class="rating">⭐8.6</span>
+                                </div>
+                            </a>
+                        </li> -->
+                    </ol>
+                </div>
+            </section>
+        </div>
     </body>
 
     <script src="js/app.js"></script>

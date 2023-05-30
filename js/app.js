@@ -7,7 +7,7 @@ const options = {
     },
 };
 
-fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko&page=1', options)
     .then((response) => response.json())
     .then((response) => loadData(response))
     .catch((err) => console.error(err));
@@ -20,6 +20,8 @@ const $searchInput = document.querySelector('#searchInput');
 function loadData(response) {
     // const rows = response['results'];
     rows = response['results'];
+    console.log(response);
+    let i = 0;
 
     for (const row of rows) {
         // console.log(row);
@@ -30,13 +32,23 @@ function loadData(response) {
         let title = row['title'];
         let overview = row['overview'];
         let poster_path = row['poster_path'];
+        let poster_img = 'https://image.tmdb.org/t/p/w500/' + poster_path;
         let vote_average = row['vote_average'];
 
-        let temp_html = `<li onclick="alert('${id}')">
-            <strong>${title}</strong>
-            <span>${overview}</span>
-            <span>${poster_path}</span>
-            <span>${vote_average}</span>
+        let temp_html = `<li>
+            <a href="#this" class="figure" onclick="alert('${id}')">
+                <div class="thumb">
+                    <span class="num">${++i}</span>
+                    <img src="${poster_img}" alt="영화 포스터" />
+                    <div class="cover">
+                        <span>${overview}</span>
+                    </div>
+                </div>
+                <div class="figcaption">
+                    <strong>${title}</strong>
+                    <span class="rating">⭐${vote_average}</span>
+                </div>
+            </a>
         </li>`;
         // $movieList.append(temp_html);
         $movieList.insertAdjacentHTML('beforeend', temp_html);
@@ -65,14 +77,24 @@ function searchData() {
         let title = entry[1]['title'];
         let overview = entry[1]['overview'];
         let poster_path = entry[1]['poster_path'];
+        let poster_img = 'https://image.tmdb.org/t/p/w500/' + poster_path;
         let vote_average = entry[1]['vote_average'];
 
-        let temp_html = `<li onclick="alert('${id}')">
+        let temp_html = `<li>
+        <a href="#this" class="figure" onclick="alert('${id}')">
+            <div class="thumb">
+                <span class="num"></span>
+                <img src="${poster_img}" alt="영화 포스터" />
+                <div class="cover">
+                    <span>${overview}</span>
+                </div>
+            </div>
+            <div class="figcaption">
                 <strong>${title}</strong>
-                <span>${overview}</span>
-                <span>${poster_path}</span>
-                <span>${vote_average}</span>
-            </li>`;
+                <span class="rating">⭐${vote_average}</span>
+            </div>
+        </a>
+    </li>`;
         // $movieList.removeChild('li');
         $movieList.textContent = '';
         $movieList.insertAdjacentHTML('beforeend', temp_html);
