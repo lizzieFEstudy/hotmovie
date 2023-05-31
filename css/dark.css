@@ -1,0 +1,27 @@
+/* dark */
+@media (prefers-color-scheme: dark) {
+    .movie_section {
+        /* background: #1f212d; */
+        background: #101118;
+    }
+
+    .movie_list .figcaption strong {
+        color: #fff;
+    }
+}
+
+/* User Theme : dark */
+[data-theme='dark'] .movie_section {
+    background: #101118;
+}
+[data-theme='dark'] .movie_list .figcaption strong {
+    color: #fff;
+}
+
+/* User Theme : light */
+[data-theme='light'] .movie_section {
+    background: #fafcff;
+}
+[data-theme='light'] .movie_list .figcaption strong {
+    color: #333;
+}
