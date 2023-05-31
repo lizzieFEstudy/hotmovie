@@ -1,6 +1,10 @@
-let movies;
 const $movieList = document.querySelector('#movieList');
 const $searchInput = document.querySelector('#searchInput');
+const $themeText = document.querySelector('#themeBtn b');
+const $recentList = document.querySelector('#recentList');
+let movies;
+let keywordArr = JSON.parse(localStorage.getItem('recentkeyword')) || [];
+const theme = localStorage.getItem('theme');
 const options = {
     method: 'GET',
     headers: {
@@ -48,10 +52,13 @@ let loadData = () => {
 
 let searchData = () => {
     const query = $searchInput.value.toUpperCase();
+    if (query == '') return alert('영화 제목을 입력해주세요');
+    saveRecentKeyword();
 
     let filteredMovies = movies.filter((movie) => {
         return movie[1]['title'].toUpperCase().includes(query) || movie[1]['original_title'].toUpperCase().includes(query);
     });
+    if (!filteredMovies.length) return alert('해당하는 영화가 없습니다');
 
     $movieList.textContent = '';
     for (const movie of filteredMovies) {
@@ -85,4 +92,49 @@ let clearInput = () => {
 
 let keyboardSearch = (e) => {
     if (e.keyCode == 13) searchData();
+};
+
+// 다크 모드
+if (theme) {
+    $themeText.innerHTML = theme === 'dark' ? 'ON' : 'OFF';
+    document.documentElement.setAttribute('data-theme', theme);
+}
+let toggleTheme = () => {
+    const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    $themeText.innerHTML = newTheme === 'dark' ? 'ON' : 'OFF';
+
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+};
+
+// 최근 검색어
+let loadRecentKeyword = () => {
+    $recentList.textContent = '';
+    for (keyword of keywordArr) {
+        let temp_html = `<li><a href="#">${keyword}</a><button type="button" class="del_btn" onclick="delRecentKeyword('${keyword}')" title="삭제">X</button></li>`;
+        $recentList.insertAdjacentHTML('beforeend', temp_html);
+    }
+};
+loadRecentKeyword();
+
+let saveRecentKeyword = () => {
+    const newKeyword = $searchInput.value;
+    const MAXIMUM_SIZE = 5;
+
+    if (keywordArr.length >= MAXIMUM_SIZE) {
+        keywordArr.pop();
+    }
+    keywordArr.unshift(newKeyword);
+    localStorage.setItem('recentkeyword', JSON.stringify(keywordArr));
+
+    loadRecentKeyword();
+};
+
+let delRecentKeyword = (target) => {
+    keywordArr = keywordArr.filter((keyword) => keyword !== target);
+    localStorage.setItem('recentkeyword', JSON.stringify(keywordArr));
+
+    loadRecentKeyword();
 };
