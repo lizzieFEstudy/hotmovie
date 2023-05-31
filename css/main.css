@@ -149,7 +149,7 @@
 .movie_list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 .movie_list > li {
     flex: 0 1 25%;

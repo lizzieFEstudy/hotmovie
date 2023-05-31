@@ -22,7 +22,14 @@
                 <div class="inner flex-center fd-col">
                     <div class="search_form">
                         <h2 class="sr_only">영화 검색</h2>
-                        <input id="searchInput" class="form" type="text" placeholder="영화 제목을 검색해보세요" onkeydown="keyboardSearch(event)" />
+                        <input
+                            id="searchInput"
+                            class="form"
+                            type="text"
+                            placeholder="영화 제목을 검색해보세요"
+                            onkeydown="keyboardSearch(event)"
+                            value="대부"
+                        />
                         <button type="button" class="btn btn_primary" onclick="searchData()">검색</button>
                         <button type="button" class="btn btn_gray" onclick="clearInput()">초기화</button>
                     </div>

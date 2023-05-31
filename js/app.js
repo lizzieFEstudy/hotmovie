@@ -24,9 +24,8 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko&page=1', options
     .catch((err) => console.error(err));
 
 let loadData = () => {
+    $movieList.textContent = '';
     for (const movie of movies) {
-        // console.log(movie);
-
         let { id, title, overview, poster_path, vote_average } = movie[1];
         let index = Number(movie[0]) + 1;
         let poster_img = 'https://image.tmdb.org/t/p/w500/' + poster_path;
@@ -50,10 +49,9 @@ let loadData = () => {
     }
 };
 
-let searchData = () => {
-    const query = $searchInput.value.toUpperCase();
+let searchData = (searchKeyword) => {
+    const query = ((!searchKeyword ? saveRecentKeyword() : searchKeyword) || $searchInput.value).toUpperCase();
     if (query == '') return alert('영화 제목을 입력해주세요');
-    saveRecentKeyword();
 
     let filteredMovies = movies.filter((movie) => {
         return movie[1]['title'].toUpperCase().includes(query) || movie[1]['original_title'].toUpperCase().includes(query);
@@ -113,7 +111,7 @@ let toggleTheme = () => {
 let loadRecentKeyword = () => {
     $recentList.textContent = '';
     for (keyword of keywordArr) {
-        let temp_html = `<li><a href="#">${keyword}</a><button type="button" class="del_btn" onclick="delRecentKeyword('${keyword}')" title="삭제">X</button></li>`;
+        let temp_html = `<li><a href="#" onclick="searchData('${keyword}')">${keyword}</a><button type="button" class="del_btn" onclick="delRecentKeyword('${keyword}')" title="삭제">X</button></li>`;
         $recentList.insertAdjacentHTML('beforeend', temp_html);
     }
 };
@@ -138,3 +136,5 @@ let delRecentKeyword = (target) => {
 
     loadRecentKeyword();
 };
+
+// document.querySelectorAll('')
