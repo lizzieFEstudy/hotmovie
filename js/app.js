@@ -23,7 +23,7 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko&page=1', options
     })
     .catch((err) => console.error(err));
 
-let loadData = (movies) => {
+const loadData = (movies) => {
     $movieList.textContent = '';
     for (const movie of movies) {
         let { id, title, overview, poster_path, vote_average } = movie[1];
@@ -49,7 +49,7 @@ let loadData = (movies) => {
     }
 };
 
-let searchData = (searchKeyword) => {
+const searchData = (searchKeyword) => {
     const query = ((!searchKeyword ? saveRecentKeyword() : searchKeyword) || $searchInput.value).toUpperCase();
     if (query == '') return alert('영화 제목을 입력해주세요');
 
@@ -61,12 +61,12 @@ let searchData = (searchKeyword) => {
     loadData(filteredMovies);
 };
 
-let clearInput = () => {
+const clearInput = () => {
     $searchInput.value = '';
     loadData(movies);
 };
 
-let keyboardSearch = (e) => {
+const keyboardSearch = (e) => {
     if (e.keyCode == 13) searchData();
 };
 
@@ -75,7 +75,7 @@ if (theme) {
     $themeText.innerHTML = theme === 'dark' ? 'ON' : 'OFF';
     document.documentElement.setAttribute('data-theme', theme);
 }
-let toggleTheme = () => {
+const toggleTheme = () => {
     const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -86,7 +86,7 @@ let toggleTheme = () => {
 };
 
 // 최근 검색어
-let loadRecentKeyword = () => {
+const loadRecentKeyword = () => {
     $recentList.textContent = '';
     for (keyword of keywordArr) {
         let temp_html = `<li><a href="#" onclick="searchData('${keyword}')">${keyword}</a><button type="button" class="del_btn" onclick="delRecentKeyword('${keyword}')" title="삭제">X</button></li>`;
@@ -95,7 +95,7 @@ let loadRecentKeyword = () => {
 };
 loadRecentKeyword();
 
-let saveRecentKeyword = () => {
+const saveRecentKeyword = () => {
     const newKeyword = $searchInput.value;
     const MAXIMUM_SIZE = 5;
 
@@ -108,7 +108,7 @@ let saveRecentKeyword = () => {
     loadRecentKeyword();
 };
 
-let delRecentKeyword = (target) => {
+const delRecentKeyword = (target) => {
     keywordArr = keywordArr.filter((keyword) => keyword !== target);
     localStorage.setItem('recentkeyword', JSON.stringify(keywordArr));
 
