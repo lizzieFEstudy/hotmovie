@@ -14,7 +14,7 @@
             <header id="header">
                 <h1><a href="#" onClick="window.location.reload()">🌟최고 평점 영화 콜렉션</a></h1>
 
-                <button type="button" id="themeBtn" onclick="toggleTheme()">다크모드 <b>OFF</b></button>
+                <button type="button" id="themeBtn">다크모드 <b>OFF</b></button>
             </header>
 
             <!-- 검색 영역 -->
@@ -22,16 +22,9 @@
                 <div class="inner flex-center fd-col">
                     <div class="search_form">
                         <h2 class="sr_only">영화 검색</h2>
-                        <input
-                            id="searchInput"
-                            class="form"
-                            type="text"
-                            placeholder="영화 제목을 검색해보세요"
-                            onkeydown="keyboardSearch(event)"
-                            value="대부"
-                        />
-                        <button type="button" class="btn btn_primary" onclick="searchData()">검색</button>
-                        <button type="button" class="btn btn_gray" onclick="clearInput()">초기화</button>
+                        <input id="searchInput" class="form" type="text" placeholder="영화 제목을 검색해보세요" value="대부" />
+                        <button type="button" id="searchBtn" class="btn btn_primary">검색</button>
+                        <button type="button" id="resetBtn" class="btn btn_gray">초기화</button>
                     </div>
                     <div class="recent_data">
                         <strong>최근 검색어</strong>
@@ -75,5 +68,5 @@
         </div>
     </body>
 
-    <script src="js/app.js"></script>
+    <script src="modules/app.js" type="module"></script>
 </html>
